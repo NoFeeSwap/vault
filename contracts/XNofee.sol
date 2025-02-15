@@ -17,7 +17,6 @@ import {XNofeePortal} from "./XNofeePortal.sol";
 /// than initially deposited due to nofee payments from the
 /// 'IncentivePoolFactory' contract to this contract.
 contract XNofee is IXNofee, ERC4626Permit {
-  
   /// @inheritdoc IXNofee
   IXNofeePortal public immutable override portal;
 
