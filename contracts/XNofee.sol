@@ -106,6 +106,37 @@ contract XNofee is IXNofee, ERC4626Permit {
     IXNofeeTrustee(trustee).delegate(delegatee);
   }
 
+  /// @inheritdoc IERC4626
+  function maxDeposit(
+    address receiver
+  ) public view override (ERC4626, IERC4626) returns (uint256) {
+    if (receiver == address(portal)) {
+      return INofee(asset()).totalSupply() - totalAssets();
+    }
+    return 0;
+  }
+
+  /// @inheritdoc IERC4626
+  function maxMint(
+    address receiver
+  ) public view override (ERC4626, IERC4626) returns (uint256) {
+    return previewDeposit(maxDeposit(receiver));
+  }
+
+  /// @inheritdoc IERC4626
+  function maxWithdraw(
+    address receiver
+  ) public view override (ERC4626, IERC4626) returns (uint256) {
+    return previewRedeem(maxRedeem(receiver));
+  }
+
+  /// @inheritdoc IERC4626
+  function maxRedeem(
+    address receiver
+  ) public view override (ERC4626, IERC4626) returns (uint256) {
+    return balanceOf(receiver);
+  }
+
   /// @inheritdoc IXNofee
   function transferFromTrustee() external override {
     _transferFromTrustee(msg.sender, trusteeBalance[msg.sender]);
