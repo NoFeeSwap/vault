@@ -14,18 +14,21 @@ To get started, first install the following system dependencies:
 ```bash
 sudo apt update
 sudo apt install build-essential python3-dev python3.12-dev python3.12-venv npm
-npm install hardhat
-```
-Create and initialize a Python virtual environment
-```bash
-python3 -m venv nofeeswap-vault
-source nofeeswap-vault/bin/activate
 ```
 Clone the repo and it submodules
 ```bash
 git clone https://github.com/NoFeeSwap/vault.git
 cd vault
 git submodule update --init --depth 1
+```
+Install hardhat
+```bash
+npm install hardhat@2.24.0 --save-dev
+```
+Create and initialize a Python virtual environment
+```bash
+python3.12 -m venv nofeeswap-vault
+source nofeeswap-vault/bin/activate
 ```
 Install the Python dependencies
 ```bash
